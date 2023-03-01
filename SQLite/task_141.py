@@ -6,13 +6,16 @@
 
 import sqlite3
 
+# Создаем файл с нашей базой данных
 with sqlite3.connect("BookInfo.db") as db:
     cursor = db.cursor()
 
+# Создаем таблицу Authors содержащую значения (Name, PlaceofBirth)
 cursor.execute("""CREATE TABLE IF NOT EXISTS Authors(
 Name text PRIMARY KEY,
 PlaceofBirth text); """)
 
+# Добавляем данные в таблицу
 cursor.execute("""INSERT INTO Authors(Name, PlaceofBirth)
 VALUES("Agatha Christie", "Torquay")""")
 db.commit()
@@ -26,12 +29,14 @@ cursor.execute("""INSERT INTO Authors(Name, PlaceofBirth)
 VALUES("Oscar Wilde", "Dublin")""")
 db.commit()
 
+# Создаем таблицу Books содержащую значения (ID, Title, Author, DatePublished)
 cursor.execute("""CREATE TABLE IF NOT EXISTS Books(
 ID integer PRIMARY KEY,
 Title text,
 Author text,
 DatePublished integer); """)
 
+# Добавляем данные в таблицу
 cursor.execute("""INSERT INTO Books(ID, Title, Author, DatePublished)
 VALUES("1", "De Profundis", "Oscar Wilde", "1905")""")
 db.commit()
